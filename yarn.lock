@@ -350,6 +350,20 @@
     uuid "^3.2.1"
     zip-dir "^1.0.2"
 
+"@theia/java@latest":
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/@theia/java/-/java-0.3.13.tgz#66afedf12f8e227f520500677c9f945b57413ec0"
+  dependencies:
+    "@theia/core" "^0.3.13"
+    "@theia/editor" "^0.3.13"
+    "@theia/languages" "^0.3.13"
+    "@theia/monaco" "^0.3.13"
+    "@types/glob" "^5.0.30"
+    "@types/tar" "4.0.0"
+    glob "^7.1.2"
+    mkdirp "^0.5.0"
+    tar "^4.0.0"
+
 "@theia/languages@^0.3.13", "@theia/languages@latest":
   version "0.3.13"
   resolved "https://registry.yarnpkg.com/@theia/languages/-/languages-0.3.13.tgz#f7e82b28df5fe0106dd6f4d0d60bdf7021793b40"
@@ -538,7 +552,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/glob@*":
+"@types/glob@*", "@types/glob@^5.0.30":
   version "5.0.35"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-5.0.35.tgz#1ae151c802cece940443b5ac246925c85189f32a"
   dependencies:
@@ -660,6 +674,12 @@
 "@types/tar-fs@^1.16.1":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@types/tar-fs/-/tar-fs-1.16.1.tgz#6e3fba276c173e365ae91e55f7b797a0e64298e5"
+  dependencies:
+    "@types/node" "*"
+
+"@types/tar@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/tar/-/tar-4.0.0.tgz#e3239d969eeb693a012200613860d0eb871c94f0"
   dependencies:
     "@types/node" "*"
 
@@ -8132,7 +8152,7 @@ tar@^2.0.0:
     fstream "^1.0.2"
     inherits "2"
 
-tar@^4:
+tar@^4, tar@^4.0.0:
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.6.tgz#63110f09c00b4e60ac8bcfe1bf3c8660235fbc9b"
   dependencies:
