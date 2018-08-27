@@ -23,7 +23,11 @@ export const modelMapping = {
     requiredStatesItem: '#requiredStatesItem',
 		providedStateItem: '#providedStateItem',
 		requiredActor: '#requiredActors',
-		requiredParameter: '#requiredParameters'
+    requiredParameter: '#requiredParameters',
+    state: '#state',
+    booleanState: '#booleanState',
+    dateTimeState: '#dateTimeState',
+    numberState: '#numberState'
  	}	
 };
 

@@ -1,4 +1,91 @@
 export default {
+
+  definitions: {
+    // STATE
+    state: {
+      $id: "#state",
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        description: { type: "string" },
+        name: { type: "string" },
+        multiple: { type: "boolean" },
+        requiresName: { type: "boolean" },
+        type: {
+          type: "string",
+          enum: [
+            "Item",
+            "Virtual",
+            "Framework"
+          ]
+        },
+        tags: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        defaultValueString: { type: "string" },
+        defaultValue: { type: "object" }
+      },
+      required: ["id", "description", "name", "multiple", "requiresName", "type", "tags", "defaultValueString", "defaultValue"]
+    },
+
+    // CONCRETE STATES
+    booleanState: {
+      $id: "#booleanState",
+      type: "object",
+      allOf: [
+        { $ref: "#/definitions/state" }
+      ]
+    },
+    dateTimeState: {
+      $id: "#dateTimeState",
+      type: "object",
+      allOf: [
+        { $ref: "#/definitions/state" }
+      ]
+    },
+    numberState: {
+      $id: "#numberState",
+      type: "object",
+      allOf: [
+        { $ref: "#/definitions/state" }
+      ]
+    },
+
+    //CONCRETE PLUGINS
+    heatingActor: {
+      $id: "#heatingActor",
+      type: "object",
+      allOf: [
+        { $ref: "#/definitions/state" }
+      ]
+    },
+    lockUnlockActor: {
+      $id: "#lockUnlockActor",
+      type: "object",
+      allOf: [
+        { $ref: "#/definitions/state" }
+      ]
+    },
+    onOffActor: {
+      $id: "#onOffActor",
+      type: "object",
+      allOf: [
+        { $ref: "#/definitions/state" }
+      ]
+    },
+    playPauseActor: {
+      $id: "#playPauseActor",
+      type: "object",
+      allOf: [
+        { $ref: "#/definitions/state" }
+      ]
+    }
+
+  },
+
   $id: "#appdescription",
   type: "object",
   properties: {
@@ -74,56 +161,18 @@ export default {
         ]
       }
     },
+
+    // required state with 
     requiredStates: {
       type: "array",
-      items: {
-        $id: "#requiredStatesItem",
-        type: "object",
-        properties: {
-          id: {
-            type: "string"
-          },
-          description: {
-            type: "string"
-          },
-          name: {
-            type: "string"
-          },
-          multiple: {
-            type: "boolean"
-          },
-          requiresName: {
-            type: "boolean"
-          },
-          type: {
-            type: "string",
-            enum: [
-              "Item",
-              "Virtual",
-              "Framework"
-            ]
-          },
-          tags: {
-            type: "array",
-            items: {
-              type: "string"
-            }
-          },
-          defaultValueString: {
-            type: "string"
-          }
-        },
-        additionalProperties: false,
-        required: [
-          "id",
-          "description",
-          "name",
-          "multiple",
-          "requiresName",
-          "type",
-          "defaultValueString"
+      items: { 
+        anyOf: [
+          { $ref: "#/definitions/booleanState" },
+          { $ref: "#/definitions/dateTimeState" },
+          { $ref: "#/definitions/numberState" }
+
         ]
-      }
+       }
     },
     requiredActors: {
       type: "array",
