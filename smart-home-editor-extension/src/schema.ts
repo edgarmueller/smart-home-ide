@@ -35,51 +35,51 @@ export default {
     booleanState: {
       $id: "#booleanState",
       type: "object",
-      allOf: [
+      anyOf: [
         { $ref: "#/definitions/state" }
       ]
     },
     dateTimeState: {
       $id: "#dateTimeState",
       type: "object",
-      allOf: [
+      anyOf: [
         { $ref: "#/definitions/state" }
       ]
     },
     numberState: {
       $id: "#numberState",
       type: "object",
-      allOf: [
+      anyOf: [
         { $ref: "#/definitions/state" }
       ]
     },
 
-    //CONCRETE PLUGINS
+    //CONCRETE ACTORS
     heatingActor: {
       $id: "#heatingActor",
       type: "object",
-      allOf: [
+      anyOf: [
         { $ref: "#/definitions/state" }
       ]
     },
     lockUnlockActor: {
       $id: "#lockUnlockActor",
       type: "object",
-      allOf: [
+      anyOf: [
         { $ref: "#/definitions/state" }
       ]
     },
     onOffActor: {
       $id: "#onOffActor",
       type: "object",
-      allOf: [
+      anyOf: [
         { $ref: "#/definitions/state" }
       ]
     },
     playPauseActor: {
       $id: "#playPauseActor",
       type: "object",
-      allOf: [
+      anyOf: [
         { $ref: "#/definitions/state" }
       ]
     }
@@ -170,7 +170,6 @@ export default {
           { $ref: "#/definitions/booleanState" },
           { $ref: "#/definitions/dateTimeState" },
           { $ref: "#/definitions/numberState" }
-
         ]
        }
     },
