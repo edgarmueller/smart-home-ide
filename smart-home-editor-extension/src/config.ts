@@ -4,22 +4,44 @@ export const labels = {
 	},
 	"#providedStateItem": {
 		constant: "Provided State",
-	},
+  },
+  "#requiredStatesItem" : {
+		constant: "Required State",
+  },
 	"#requiredActor": {
 		constant: "Required Actors"
 	},
 	"#requiredParameter": {
 		constant: "Required Parameters",
-	}
+  },
+  // STATES
+  "#booleanState": {
+    constant: "Boolean State"
+  },
+  "#dateTimeState": {
+    constant: "Date Time State"
+  }, 
+  "#numberState": {
+    constant: "Number State"
+  }
 }
 
 export const modelMapping = {
 	attribute: 'type',
  	mapping: {
-		appdescription: '#appdescription',
+    appdescription: '#appdescription',
+    requiredStatesItem: '#requiredStatesItem',
 		providedStateItem: '#providedStateItem',
 		requiredActor: '#requiredActors',
-		requiredParameter: '#requiredParameters'
+    requiredParameter: '#requiredParameters',
+    state: '#state',
+    booleanState: '#booleanState',
+    dateTimeState: '#dateTimeState',
+    numberState: '#numberState',
+    heatingActor: '#heatingActor',
+    lockUnlockActor: '#lockUnlockActor',
+    onOffActor: '#onOffActor',
+    playPauseActor: '#playPauseActor'
  	}	
 };
 
@@ -54,11 +76,6 @@ export const uischemas = {
       {
         type: 'Control',
         scope: '#/properties/className'
-      },
-      {
-        type: 'Control',
-        label: "Do enable?",
-	scope: '#/properties/enabled'
       }
     ]
   },
@@ -89,6 +106,16 @@ export const uischemas = {
     }]
   },
   '#requiredActor': {
+    type: 'VerticalLayout',
+    elements: [{
+      type: 'Control',
+      scope: '#/properties/name'
+    }, {
+      type: 'Control',
+      scope: '#/properties/description'
+    }]
+  },
+  '#booleanState': {
     type: 'VerticalLayout',
     elements: [{
       type: 'Control',
