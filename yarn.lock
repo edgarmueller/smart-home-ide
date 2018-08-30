@@ -397,6 +397,16 @@
   dependencies:
     "@theia/core" "^0.3.13"
 
+"@theia/mini-browser@latest":
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/@theia/mini-browser/-/mini-browser-0.3.13.tgz#352b437287a238948b7f08beb99f040df7a79fde"
+  dependencies:
+    "@theia/core" "^0.3.13"
+    "@theia/filesystem" "^0.3.13"
+    "@types/mime-types" "^2.1.0"
+    mime-types "^2.1.18"
+    pdfobject "^2.0.201604172"
+
 "@theia/monaco@^0.3.13", "@theia/monaco@latest":
   version "0.3.13"
   resolved "https://registry.yarnpkg.com/@theia/monaco/-/monaco-0.3.13.tgz#6fe3de8486740ef8ce4df702dd85889707f065df"
@@ -6470,6 +6480,10 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+pdfobject@^2.0.201604172:
+  version "2.0.201604172"
+  resolved "https://registry.yarnpkg.com/pdfobject/-/pdfobject-2.0.201604172.tgz#112edf93b98be121a5e780b06e7f5f78ad31ab3f"
 
 pend@~1.2.0:
   version "1.2.0"
