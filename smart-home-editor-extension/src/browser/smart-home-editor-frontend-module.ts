@@ -21,6 +21,8 @@ import { getData } from "@jsonforms/core";
 import { SmartHomeTreeEditorContribution } from './SmartHomeTreeEditorContribution';
 import { JUnitResultOpenHandler } from './editor-contribution';
 
+import '../../src/browser/style/index.css';
+
 const LIGHT_THEME_ID = "light"
 
 class MyResourceSaveable extends ResourceSaveable {
