@@ -19,6 +19,7 @@ import { IYoServer, yoPath, IYoClient } from '../common/scaffolding-protocol';
 
 import { getData } from "@jsonforms/core";
 import { SmartHomeTreeEditorContribution } from './SmartHomeTreeEditorContribution';
+import { JUnitResultOpenHandler } from './editor-contribution';
 
 const LIGHT_THEME_ID = "light"
 
@@ -50,6 +51,7 @@ export default new ContainerModule(bind => {
   ThemeService.get().setCurrentTheme(LIGHT_THEME_ID)
   bind(CommandContribution).to(SmartHomeEditorCommandContribution);
   bind(MenuContribution).to(SmartHomeEditorMenuContribution);
+  bind(OpenHandler).to(JUnitResultOpenHandler)
   bind<WidgetFactory>(WidgetFactory).toDynamicValue(ctx => ({
     id: 'theia-tree-editor',
     async createWidget(uri: string): Promise<TreeEditorWidget> {
