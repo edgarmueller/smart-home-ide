@@ -26,7 +26,9 @@ class MyResourceSaveable extends ResourceSaveable {
     super(resource, getData);
   }
   onSave(data: any) {
-    return postRequest('http://localhost:9091/services/convert/json', JSON.stringify(data), 'application/json')
+    return postRequest(window.location.protocol + '//' + window.location.hostname + ':9091/services/convert/json',
+      JSON.stringify(data),
+      'application/json')
       .then(response => response.text(), () => this.messageService.error('Save was not possible.'))
   }
 }
@@ -63,7 +65,10 @@ export default new ContainerModule(bind => {
           fileName: new URI(uri).path.base,
           saveable: new MyResourceSaveable(resource, () => getData(store.getState()), messageService),
           onResourceLoad: contentAsString => {
-            return postRequest('http://localhost:9091/services/convert/xmi', contentAsString, 'application/xml')
+            return postRequest(
+              window.location.protocol + '//' + window.location.hostname + ':9091/services/convert/xmi',
+              contentAsString,
+              'application/xml')
               .then(response => response.json(), () => messageService.error('Could not get App Manifest Editor contents.'))
           }
         });
