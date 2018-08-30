@@ -6,6 +6,7 @@ import URI from '@theia/core/lib/common/uri';
 import { FileSystem } from "@theia/filesystem/lib/common/filesystem";
 import { Workspace } from "@theia/languages/lib/common";
 import { IYoServer, ScaffoldingOptions } from "../common/scaffolding-protocol";
+import { ScaffoldingDialog } from "./scaffolding-dialog";
 
 export const DeployToEditorCommand = {
     id: 'SmartHomeEditor.deploy.command',
@@ -49,15 +50,19 @@ export class SmartHomeEditorCommandContribution implements CommandContribution {
     protected scaffoldingHandler() {
         return {
             execute: () => {
-                console.log('workspace root uri', this.workspace.rootUri);
-                console.log('workspace root path', this.workspace.rootPath);
-                const options: ScaffoldingOptions = {
-                    appName: 'ConfiguredAppName',
-                    appDescription: 'Configured App Description',
-                    appNameSpace: 'smarthome.example.apps',
-                    destinationPath: this.workspace.rootPath
-                };
-                this.yoServer.requestYo(options);
+                
+                const dialog = new ScaffoldingDialog();
+                dialog.open().then(result => {
+                    const options: ScaffoldingOptions = {
+                        appName: result.appName,
+                        appDescription: result.appDescription,
+                        appNameSpace: result.appNameSpace,
+                        authorName: result.authorName,
+                        destinationPath: this.workspace.rootPath
+                    };
+                    this.yoServer.requestYo(options);
+
+                });
             }
         }
     }

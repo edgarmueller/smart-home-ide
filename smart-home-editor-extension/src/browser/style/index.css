@@ -1,0 +1,5 @@
+.multi-text-dialog-input-property {
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
