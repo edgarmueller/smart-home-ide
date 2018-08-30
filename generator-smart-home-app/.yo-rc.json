@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "EclipseSource Munich GmbH",
+      "authorEmail": "munich@eclipsesource.com",
+      "authorUrl": "https://eclipsesource.com/munich"
+    }
+  }
+}

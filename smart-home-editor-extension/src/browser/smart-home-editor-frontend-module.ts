@@ -8,13 +8,14 @@ import {
   MenuContribution,
   MessageService
 } from "@theia/core/lib/common";
-import { ContainerModule } from "inversify";
-import { WidgetFactory, OpenHandler } from "@theia/core/lib/browser";
+import { ContainerModule, injectable } from "inversify";
+import { WidgetFactory, OpenHandler, WebSocketConnectionProvider } from "@theia/core/lib/browser";
 import { ResourceProvider, Resource } from "@theia/core/lib/common";
 import { ResourceSaveable, TreeEditorWidget, TreeEditorWidgetOptions } from "theia-tree-editor";
 import URI from "@theia/core/lib/common/uri";
 import App, { initStore } from "../App";
 import { ThemeService } from '@theia/core/lib/browser/theming';
+import { IYoServer, yoPath, IYoClient } from '../common/scaffolding-protocol';
 
 import { getData } from "@jsonforms/core";
 import { SmartHomeTreeEditorContribution } from './SmartHomeTreeEditorContribution';
@@ -80,4 +81,16 @@ export default new ContainerModule(bind => {
   [CommandContribution, MenuContribution, OpenHandler].forEach(serviceIdentifier =>
     bind(serviceIdentifier).toService(SmartHomeTreeEditorContribution)
   );
+
+    bind(SmartHomeYoClient).toSelf()
+    bind(IYoServer).toDynamicValue(ctx => {
+        const connection = ctx.container.get(WebSocketConnectionProvider);
+        const client = ctx.container.get(SmartHomeYoClient)
+        return connection.createProxy<IYoServer>(yoPath, client);
+    }).inSingletonScope();
 });
+
+@injectable()
+export class SmartHomeYoClient implements IYoClient {
+
+}
