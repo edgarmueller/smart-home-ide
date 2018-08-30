@@ -10,6 +10,9 @@
     "typescript": "2.9.2"
   },
   "workspaces": [
-    "smart-home-editor-extension", "browser-app", "electron-app"
+    "generator-smart-home-app",
+    "smart-home-editor-extension",
+    "browser-app",
+    "electron-app"
   ]
 }

@@ -4,10 +4,17 @@ import { CommonMenus } from "@theia/core/lib/browser";
 import { UriAwareCommandHandler, UriCommandHandler } from "@theia/core/lib/common/uri-command-handler";
 import URI from '@theia/core/lib/common/uri';
 import { FileSystem } from "@theia/filesystem/lib/common/filesystem";
+import { Workspace } from "@theia/languages/lib/common";
+import { IYoServer, ScaffoldingOptions } from "../common/scaffolding-protocol";
 
 export const DeployToEditorCommand = {
     id: 'SmartHomeEditor.deploy.command',
     label: "Deploy App "
+};
+
+export const ScaffoldingCommand = {
+    id: 'SmartHomeEditor.scaffolding.command',
+    label: "New Smart Home App project"
 };
 
 @injectable()
@@ -17,11 +24,18 @@ export class SmartHomeEditorCommandContribution implements CommandContribution {
     protected readonly selectionService: SelectionService;
 
     @inject(FileSystem)
-    protected readonly filesystem: FileSystem
+    protected readonly filesystem: FileSystem;
+
+    @inject(IYoServer)
+    protected readonly yoServer: IYoServer;
+
+    @inject(Workspace)
+    protected readonly workspace: Workspace;
 
     registerCommands(registry: CommandRegistry): void {
         const handler = new UriAwareCommandHandler<URI[]>(this.selectionService, this.deployHandler(), { multi: true });
         registry.registerCommand(DeployToEditorCommand, handler);
+        registry.registerCommand(ScaffoldingCommand, this.scaffoldingHandler())
     }
 
     protected deployHandler(): UriCommandHandler<URI[]> {
@@ -30,6 +44,22 @@ export class SmartHomeEditorCommandContribution implements CommandContribution {
             isEnabled: uris => this.isDeployEnabled(uris),
             isVisible: uris => this.isDeployVisible(uris),
         };
+    }
+
+    protected scaffoldingHandler() {
+        return {
+            execute: () => {
+                console.log('workspace root uri', this.workspace.rootUri);
+                console.log('workspace root path', this.workspace.rootPath);
+                const options: ScaffoldingOptions = {
+                    appName: 'ConfiguredAppName',
+                    appDescription: 'Configured App Description',
+                    appNameSpace: 'smarthome.example.apps',
+                    destinationPath: this.workspace.rootPath
+                };
+                this.yoServer.requestYo(options);
+            }
+        }
     }
     protected async deployApp(uris: URI[]): Promise<void> {
         new Promise(() => {
@@ -73,6 +103,10 @@ export class SmartHomeEditorMenuContribution implements MenuContribution {
         menus.registerMenuAction(CommonMenus.FILE_SAVE, {
             commandId: DeployToEditorCommand.id,
             label: DeployToEditorCommand.label
+        });
+        menus.registerMenuAction(CommonMenus.FILE_SAVE, {
+            commandId: ScaffoldingCommand.id,
+            label: ScaffoldingCommand.label
         });
     }
 }
