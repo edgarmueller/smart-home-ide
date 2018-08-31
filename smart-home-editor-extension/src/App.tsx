@@ -13,6 +13,7 @@ import {
 import { filterPredicate, TreeEditorApp } from 'theia-tree-editor';
 import { Cached, ContactSupport, Person } from "@material-ui/icons";
 const JsonRefs = require("json-refs");
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import schema from './schema';
 
@@ -128,7 +129,69 @@ const imageProvider = (schema: JsonSchema): React.ReactElement<any> | string => 
   return (<Icon/>)
 }
 
-export default defaultProps(
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#616161'
+    },
+    secondary: {
+      main: '#d7eaf8',
+      dark: '#26A69A'
+    },
+    background: {
+      'default': '#1E1E1E'
+    }
+  },
+  typography: {
+    fontSize: 13,
+    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
+  },
+  overrides: {
+    MuiButton: {
+      fab: {
+        width: '24px',
+        height: '24px',
+        minHeight: '0px'
+      }
+    },
+    MuiIconButton: {
+      root: {
+        minWidth: '0px',
+        width: '1em',
+        height: '1em'
+      }
+    },
+    MuiSvgIcon: {
+      root: {
+        fontSize: '18px'
+      }
+    },
+    MuiInput: {
+      root: {
+        color: '#616161'
+      }
+    },
+    MuiTypography: {
+      root: {
+        color: '#616161'
+      },
+      body1: {
+        color: '#616161'
+      },
+      subheading: {
+        color: '#616161'
+      },
+      title: {
+        color: '#616161'
+      }
+    }
+  }
+});
+
+
+
+const App =defaultProps(
   {
     'filterPredicate': filterPredicate(modelMapping),
     'labelProviders': {
@@ -138,3 +201,13 @@ export default defaultProps(
     'imageProvider': imageProvider
   }
 )(TreeEditorApp);
+
+const SmartHomerEditorApp = () => {
+  return (
+    <MuiThemeProvider theme={theme}>
+      <App/>
+    </MuiThemeProvider>
+  )
+};
+
+export default SmartHomerEditorApp;
