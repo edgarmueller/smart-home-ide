@@ -36,13 +36,7 @@ export const initStore = async() => {
   const jsonforms: any = {
     jsonforms: {
       renderers,
-      fields,
-      treeWithDetail: {
-        // imageMapping: imageProvider,
-        labelMapping: labels,
-        modelMapping,
-        uiSchemata: uischemas
-      }
+      fields
     }
   };
   await JsonRefs.resolveRefs(schema).then(res => resolvedSchema = res.resolved)
