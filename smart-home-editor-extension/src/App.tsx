@@ -10,19 +10,15 @@ import {
   JsonSchema,
   resolveData
 } from '@jsonforms/core';
-import { /*calculateLabel,*/ filterPredicate, TreeEditorApp } from 'theia-tree-editor';
+import { filterPredicate, TreeEditorApp } from 'theia-tree-editor';
 import { Cached, ContactSupport, Person } from "@material-ui/icons";
 const JsonRefs = require("json-refs");
 
 import schema from './schema';
 
-import {labels, modelMapping, uischemas} from './config';
 import { InstanceLabelProvider, SchemaLabelProvider } from '@jsonforms/material-tree-renderer/lib/helpers/LabelProvider';
 import { Icon } from "@material-ui/core";
-
-
-//const imageGetter = (schemaId: string) => 'icon-test';
-// !_.isEmpty(imageProvider) ? `icon ${imageProvider[schemaId]}` : '';
+import {modelMapping} from "./config";
 
 let resolvedSchema;
 
@@ -134,7 +130,7 @@ const imageProvider = (schema: JsonSchema): React.ReactElement<any> | string => 
 
 export default defaultProps(
   {
-    'filterPredicate': filterPredicate,
+    'filterPredicate': filterPredicate(modelMapping),
     'labelProviders': {
       forData: instanceLabelProvider,
       forSchema: schemaLabelProvider
